@@ -9,9 +9,10 @@ import {
   Ellipsis,
   Button,
 } from "./styled/styled";
+import { Address } from "ton-core";
 
 export function Counter() {
-  const { connected } = useTonConnect();
+  const { connected, wallet } = useTonConnect();
   const { value, address, sendIncrement } = useCounterContract();
 
   return (
@@ -20,10 +21,10 @@ export function Counter() {
 
       <Card>
         <FlexBoxCol>
-          <h3>Counter</h3>
+          <h3>Wallet</h3>
           <FlexBoxRow>
             <b>Address</b>
-            <Ellipsis>{address}</Ellipsis>
+            <Ellipsis>{ wallet ? Address.parse(wallet as string).toString():"Loading..."}</Ellipsis>
           </FlexBoxRow>
           <FlexBoxRow>
             <b>Value</b>
